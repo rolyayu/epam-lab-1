@@ -1,4 +1,4 @@
-package entities;
+package com.epam.entities;
 
 public class TargaCar extends SportCar{
     boolean isRemovableRoof;

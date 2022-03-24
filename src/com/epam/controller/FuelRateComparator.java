@@ -1,6 +1,6 @@
-package Controller;
+package com.epam.controller;
 
-import entities.PassengerCar;
+import com.epam.entities.PassengerCar;
 
 import java.util.Comparator;
 

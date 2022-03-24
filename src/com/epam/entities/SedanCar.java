@@ -1,18 +1,18 @@
-package entities;
+package com.epam.entities;
 
-public class UniversalCar extends CasualCar{
-    public UniversalCar(int purchaseCost, int yearFromPurchase) {
+public class SedanCar extends CasualCar {
+    public SedanCar(int purchaseCost, int yearFromPurchase) {
         super(purchaseCost, yearFromPurchase);
     }
 
     @Override
     public int getSeats() {
-        return 5;
+        return 4;
     }
 
     @Override
     public String toString() {
-        return "UniversalCar{" +
+        return "SedanCar{" +
                 "cost=" + getCost() +
                 ", yearFromPurchase=" + yearFromPurchase +
                 ", mark='" + mark + '\'' +

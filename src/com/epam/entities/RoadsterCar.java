@@ -1,4 +1,4 @@
-package entities;
+package com.epam.entities;
 
 public class RoadsterCar extends SportCar{
     public RoadsterCar(int purchaseCost, int yearFromPurchase) {

@@ -1,6 +1,6 @@
-package entities;
+package com.epam.entities;
 
-import Controller.FuelRateComparator;
+import com.epam.controller.FuelRateComparator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

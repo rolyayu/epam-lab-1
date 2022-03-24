@@ -1,6 +1,6 @@
-package Controller;
+package com.epam.controller;
 
-import entities.*;
+import com.epam.entities.*;
 
 public class Runner {
     public static void main(String[] args) {

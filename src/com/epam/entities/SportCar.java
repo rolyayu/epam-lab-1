@@ -1,4 +1,4 @@
-package entities;
+package com.epam.entities;
 
 public abstract class SportCar extends PassengerCar {
     protected boolean isTwoPlusTwo = false;

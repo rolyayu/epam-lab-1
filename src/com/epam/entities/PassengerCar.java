@@ -1,4 +1,4 @@
-package entities;
+package com.epam.entities;
 
 public abstract class PassengerCar {
     protected int purchaseCost;
