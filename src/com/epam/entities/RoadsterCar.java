@@ -1,13 +1,21 @@
 package com.epam.entities;
 
-public class RoadsterCar extends SportCar{
-    public RoadsterCar(int purchaseCost, int yearFromPurchase) {
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class RoadsterCar extends SportCar {
+    public RoadsterCar(BigDecimal purchaseCost, int yearFromPurchase) {
         super(purchaseCost, yearFromPurchase);
     }
 
     @Override
-    public int getCost() {
-        return (int) (super.getCost()*1.1);        //additional sum because of rarity and prestige
+    public BigDecimal getCost() {
+        return super.getCost().multiply(calcCoefficient()).setScale(2, RoundingMode.FLOOR);
+    }
+
+    @Override
+    protected BigDecimal calcCoefficient() {
+        return super.calcCoefficient().multiply(BigDecimal.valueOf(1.1));        //additional sum because of rarity and prestige
     }
 
     @Override

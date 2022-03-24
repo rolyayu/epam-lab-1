@@ -1,9 +1,12 @@
 package com.epam.entities;
 
-public class TargaCar extends SportCar{
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class TargaCar extends SportCar {
     boolean isRemovableRoof;
 
-    public TargaCar(int purchaseCost, int yearFromPurchase) {
+    public TargaCar(BigDecimal purchaseCost, int yearFromPurchase) {
         super(purchaseCost, yearFromPurchase);
     }
 
@@ -16,11 +19,17 @@ public class TargaCar extends SportCar{
     }
 
     @Override
-    public int getCost() {
-        int cost = super.getCost();
-        if(isTwoPlusTwo) cost*=1.05;
-        if(isRemovableRoof) cost*=1.02;
-        return  cost;
+    public BigDecimal getCost() {
+        return super.getCost().multiply(calcCoefficient()).setScale(2, RoundingMode.FLOOR);
+    }
+
+    @Override
+    protected BigDecimal calcCoefficient() {
+        BigDecimal coefficient = super.calcCoefficient();
+        if (isRemovableRoof) {
+            coefficient = coefficient.multiply(BigDecimal.valueOf(1.02));
+        }
+        return coefficient;
     }
 
     @Override

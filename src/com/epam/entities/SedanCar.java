@@ -1,7 +1,9 @@
 package com.epam.entities;
 
+import java.math.BigDecimal;
+
 public class SedanCar extends CasualCar {
-    public SedanCar(int purchaseCost, int yearFromPurchase) {
+    public SedanCar(BigDecimal purchaseCost, int yearFromPurchase) {
         super(purchaseCost, yearFromPurchase);
     }
 

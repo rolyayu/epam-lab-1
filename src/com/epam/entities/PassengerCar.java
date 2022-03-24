@@ -1,7 +1,10 @@
 package com.epam.entities;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public abstract class PassengerCar {
-    protected int purchaseCost;
+    protected BigDecimal purchaseCost;
     protected int yearFromPurchase;
     protected String mark;
     protected int maxSpeed;
@@ -9,12 +12,12 @@ public abstract class PassengerCar {
     protected int totalMileage;
     protected FuelType fuelType;
 
-    public PassengerCar(int purchaseCost, int yearFromPurchase) {
+    public PassengerCar(BigDecimal purchaseCost, int yearFromPurchase) {
         this.purchaseCost = purchaseCost;
         this.yearFromPurchase = yearFromPurchase;
     }
 
-    public int getPurchaseCost() {
+    public BigDecimal getPurchaseCost() {
         return purchaseCost;
     }
 
@@ -47,11 +50,6 @@ public abstract class PassengerCar {
         return fuelType.averageMileage();
     }
 
-
-    public String getFuelType() {
-        return fuelType.type();
-    }
-
     public void setFuelType(FuelType fuelType) {
         this.fuelType = fuelType;
     }
@@ -64,18 +62,26 @@ public abstract class PassengerCar {
         this.totalMileage = totalMileage;
     }
 
-    public int getYearFromPurchase() {
-        return yearFromPurchase;
-    }
-
     public abstract int getSeats();
 
-    public int getCost(){
-        double coefficient = getTotalMileage()/(getPreferredMileage()*yearFromPurchase*1.);
-        int totalCost = purchaseCost;
-        if (coefficient>1.2) coefficient=1.2;
-        else if (coefficient<0.7) coefficient=0.7;
-        return (int) (totalCost*coefficient);
+    public BigDecimal getCost() {
+        BigDecimal totalCost = getPurchaseCost();
+        return totalCost.multiply(calcCoefficient()).setScale(2, RoundingMode.FLOOR);
+    }
+
+    protected BigDecimal calcCoefficient() {
+        BigDecimal coefficient = BigDecimal.valueOf(getTotalMileage() / (getPreferredMileage() * yearFromPurchase * 1.));
+        if (coefficient.doubleValue() > 1.2) {
+            coefficient = BigDecimal.valueOf(1.2);
+        }
+        if (coefficient.doubleValue() < 0.7) {
+            coefficient = BigDecimal.valueOf(0.7);
+        }
+        return coefficient;
+    }
+
+    public boolean matchesSpeed(int lowerBound, int upperBound) {
+        return this.maxSpeed > lowerBound && this.maxSpeed < upperBound;
     }
 
     @Override
@@ -83,11 +89,11 @@ public abstract class PassengerCar {
         return "PassengerCar{" +
                 "cost=" + getCost() +
                 ", yearFromPurchase= " + yearFromPurchase +
-                ", seats=" +getSeats()+
-                ", fuelType=" +fuelType+
+                ", seats=" + getSeats() +
+                ", fuelType=" + fuelType +
                 ", maxSpeed=" + maxSpeed +
                 ", mark='" + mark + '\'' +
-                ", totalMileage=" + getTotalMileage()+
+                ", totalMileage=" + getTotalMileage() +
                 ", fuelRate=" + fuelRate +
                 '}';
     }

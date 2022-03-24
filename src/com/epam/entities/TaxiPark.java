@@ -1,48 +1,27 @@
 package com.epam.entities;
 
-import com.epam.controller.FuelRateComparator;
+import com.epam.comparators.FuelRateComparator;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class TaxiPark {
-    private PassengerCar[] cars;
+    private List<PassengerCar> cars;
 
-    public PassengerCar[] getCars() {
+    public List<PassengerCar> getCars() {
         return cars;
     }
 
-    public void setCars(PassengerCar[] cars) {
+    public void setCars(List<PassengerCar> cars) {
         this.cars = cars;
-    }
-
-    public int cost() {
-        int cost = 0;
-        for(PassengerCar car:getCars()) {
-            cost+=car.getCost();
-        }
-        return cost;
-    }
-
-    public void sort(){
-        Arrays.sort(getCars(),new FuelRateComparator());
-    }
-
-    public List<PassengerCar> findBySpeed(int lowerBound,int upperBound) {
-        List<PassengerCar> carList = new ArrayList<>();
-        for(PassengerCar car:getCars()) {
-            if(car.getMaxSpeed()>lowerBound & car.getMaxSpeed()<upperBound) {
-                carList.add(car);
-            }
-        }
-        return carList;
     }
 
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder("TaxiPark {\n");
-        for(PassengerCar car:cars) result.append(car).append("\n");
+        cars.forEach(car-> result.append(car).append("\n"));
         return result.append("}").toString();
     }
 }

@@ -1,7 +1,9 @@
 package com.epam.entities;
 
-public class UniversalCar extends CasualCar{
-    public UniversalCar(int purchaseCost, int yearFromPurchase) {
+import java.math.BigDecimal;
+
+public class UniversalCar extends CasualCar {
+    public UniversalCar(BigDecimal purchaseCost, int yearFromPurchase) {
         super(purchaseCost, yearFromPurchase);
     }
 
